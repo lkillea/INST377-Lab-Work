@@ -2,20 +2,80 @@
 import express from 'express';
 import sequelize from 'sequelize';
 import chalk from 'chalk';
+import fetch from 'node-fetch';
 
 import db from '../database/initializeDB.js';
+import hallIdQuery from '../controllers/diningHall.js';
 
 const router = express.Router();
 
+// localhost:3000/api
 router.get('/', (req, res) => {
   console.log('You touched the default route!');
-  res.send('Welcome to the UMD Dining API!');
+  res.json({message: 'Welcome to the UMD Dining API!'});
+  // res.send('Welcome to the UMD Dining API!');
 });
 
-router.get('/demo', (req, res) => {
-  console.log('You touched the demo route!');
-  res.send('<h1>Welcome to the UMD Dining API!</h1><br>');
-});
+// /////////////////////////////////
+// Food Inspection Set Demos
+// /////////////////////////////////
+router.route('/foodServicesPG')
+  .get(async (req, res) => {
+    try {
+      const url = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
+      const data = await fetch(url);
+      const json = await data.json();
+      console.log(json);
+
+      res.json({data: json});
+    } catch (err) {
+      console.log(error);
+      res.json({error: error});
+    }
+  })
+  .put((req, res) => {
+    try {
+      res.json({message: 'put FoodServices endpoint'});
+    } catch (err) {
+      console.log(error);
+      res.json({error: 'Something went wrong on the server'});
+    }
+  })
+  .post((req, res) => {
+    try {
+      console.log('Touched post endpoint', req.body);
+      console.log(req.body?.resto);
+      res.json({message: 'post FoodServices endpoint'});
+    } catch (err) {
+      console.log(error);
+      res.json({error: 'Something went wrong on the server'});
+    }
+  })
+  .delete((req, res) => {
+    try {
+      res.json({message: 'delete FoodServices endpoint'});
+    } catch (err) {
+      console.log(error);
+      res.json({error: 'Something went wrong on the server'});
+    }
+  });
+
+router.route('/sqlDemo')
+  .post(async (req, res) => {
+    try {
+      console.log(req.body);
+      console.log(req.body?.dining);
+      const hallId = req.body?.dining || 0;
+      const result = await db.sequelizeDB.query(hallIdQuery, {
+        replacements: { hall_id: hallId },
+        type: sequelize.QueryTypes.SELECT
+      });
+      res.json({data: result});
+    } catch (err) {
+      console.log(err);
+      res.send({message: 'Something went wrong on the SQL request'});
+    }
+  });
 
 // /////////////////////////////////
 // ////WholeMeal demos////////
@@ -313,28 +373,28 @@ router.get('/table/data', async (req, res) => {
   }
 });
 
-const mealMapCustom = `SELECT hall_name,
-  hall_address,
-  hall_lat,
-  hall_long,
-  meal_name
-FROM
-  Meals m
-INNER JOIN Meals_Locations ml 
-  ON m.meal_id = ml.meal_id
-INNER JOIN Dining_Hall d
-ON d.hall_id = ml.hall_id;`;
-router.get('/map/data', async (req, res) => {
-  try {
-    const result = await db.sequelizeDB.query(mealMapCustom, {
-      type: sequelize.QueryTypes.SELECT
-    });
-    res.json(result);
-  } catch (err) {
-    console.error(err);
-    res.send('Server error');
-  }
-});
+// const mealMapCustom = `SELECT hall_name,
+//   hall_address,
+//   hall_lat,
+//   hall_long,
+//   meal_name
+// FROM
+//   Meals m
+// INNER JOIN Meals_Locations ml
+//   ON m.meal_id = ml.meal_id
+// INNER JOIN Dining_Hall d
+// ON d.hall_id = ml.hall_id;`;
+// router.get('/map/data', async (req, res) => {
+//   try {
+//     const result = await db.sequelizeDB.query(mealMapCustom, {
+//       type: sequelize.QueryTypes.SELECT
+//     });
+//     res.json(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.send('Server error');
+//   }
+// });
 router.get('/custom', async (req, res) => {
   try {
     const result = await db.sequelizeDB.query(req.body.query, {

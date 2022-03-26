@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import express from 'express';
-import labRoutes from './server/labRoutes.js';
-import apiRoutes from './server/routes/apiRoutes.js';
 import reload from 'livereload';
 import connectReload from 'connect-livereload';
 import dotenv from 'dotenv';
 import path from 'path';
+import apiRoutes from './server/routes/apiRoutes.js';
+import labRoutes from './server/labRoutes.js';
 
 dotenv.config();
 const __dirname = path.resolve();
@@ -37,12 +37,12 @@ app.use('/api', apiRoutes);
 
 async function bootServer() {
   try {
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
       // Turn these back on in later labs
       // const mysql = await db.sequelizeDB;
       // await mysql.sync();
       console.log(`Listening on: http//localhost:${PORT}`);
-      console.log(`environment:`, process.env.CONTEXT);
+      console.log('environment:', process.env.CONTEXT);
     });
   } catch (err) {
     console.error(err);
