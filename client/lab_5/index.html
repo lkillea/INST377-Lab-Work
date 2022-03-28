@@ -11,16 +11,28 @@
         </header>
         <form action= '' method= 'get' class= 'form'>
             <div class='form-row'>
-                <label for='First-Name'>First Name</label>
+                <label for='First-Name'><b>First Name</b></label>
                 <input id='First-Name' name='First-Name' type='text'/>
             </div>
             <div class='form-row'>
-                <label for='Food-Preference'>Food Preference</label>
+                <label for='Food-Preference'><b>Food Preference</b></label>
                 <input id='Food-Preference' food preference='Food-Preference' type='text'/>
             </div>
-            <div class='form-row'>
-                <label for='Veggie-or-Vegan'>Veggie or Vegan?</label>
-                <input id='Veggie-or-Vegan' Veggie or Vegan?='Veggie-or-Vegan' type='text'/>
+            <fieldset class='legacy-form-row'>
+                <legend><b>Veggie or Vegan?</b></legend>
+                <input id='veggie'
+                    name='veggie-or-vegan'
+                    type='radio'
+                    value='Veggie' />
+                <label for='veggie' class='veggie-or-vegan'>Yes</label>
+                <input id='vegan'
+                    name='veggie-or-vegan'
+                    type='radio'
+                    value='Vegan' 
+                    checked />
+                <label for='vegan' class='veggie-or-vegan'>No</label>
+            </fieldset>
+
             </div>
         </form>
     </body>
