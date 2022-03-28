@@ -29,7 +29,7 @@ body {
 /* Flexbox Properties */
 .form-header {
   background-color: #5995DA;
-  width: 300px;
+  width: 3100px;
   height: 300px;
   display: flex;
   justify-content: center;
