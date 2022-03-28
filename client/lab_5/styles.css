@@ -34,6 +34,10 @@ body {
   text-align: left;
   display: flex;
   justify-content: left;
+
+  width: 80%;
+  margin: 40px 0;
+  padding: 50px;
 }
 
 .form-header-h1 {
