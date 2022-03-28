@@ -25,3 +25,12 @@ body {
   max-width: 960px;
   margin-top: 25px;
 }
+
+/* Flexbox Properties */
+.menu-container {
+background-color: #5995DA;
+width: 900px;
+height: 300px;
+display: flex;
+justify-content: center;
+}
