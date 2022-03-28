@@ -29,11 +29,11 @@ body {
 /* Flexbox Properties */
 .form-header {
   background-color: #5995DA;
-  width: 1600px;
+  width: 1800px;
   height: 300px;
   text-align: left;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 
 .form-header-h1 {
