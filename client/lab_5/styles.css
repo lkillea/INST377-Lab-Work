@@ -31,6 +31,7 @@ body {
   background-color: #5995DA;
   width: 3100px;
   height: 300px;
+  text-align: left;
   display: flex;
   justify-content: center;
 }
