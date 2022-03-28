@@ -27,10 +27,15 @@ body {
 }
 
 /* Flexbox Properties */
-.menu-container {
-background-color: #5995DA;
-width: 900px;
-height: 300px;
-display: flex;
-justify-content: center;
+.form-header {
+  background-color: #5995DA;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-header-h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
 }
