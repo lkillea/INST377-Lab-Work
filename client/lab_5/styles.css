@@ -33,7 +33,7 @@ body {
   height: 150px;
   text-align: left;
   display: flex;
-  justify-content: left;
+  justify-content: flex-start;
 
   width: 80%;
   margin: 40px 40px;
@@ -53,7 +53,7 @@ body {
   border-radius: 3px;*/
 
   
-  width: 80%;
+  width: 40%;
   padding: 50px;
   margin: 40px 40px;
 }
@@ -62,7 +62,7 @@ body {
   margin-bottom: 40px;
   display: flex;
   justify-content: flex-start;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
@@ -121,4 +121,18 @@ body {
   .form-row button {
     margin-right: 1400px;
   }
+}
+
+.new-box {
+  background-color: #F6F7F8;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  text-align: center;
+}
+
+.new-box div {
+  width: 800px;
+  height: 100px;
 }
