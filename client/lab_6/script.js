@@ -6,19 +6,32 @@ function getRandomIntInclusive(min, max) {
 
 function restoArrayMake(dataArray) {
   console.log('fired dataHandler');
-  console.table(dataArray);
+  // console.table(dataArray); //
   const range = [...Array(15).keys()];
   const listItems = range.map((item, index) => {
     const restoNum = getRandomIntInclusive(0, dataArray.length - 1);
     return dataArray[restoNum];
   });
-  console.log(listItems);
+  // console.log(listItems);
   return listItems;
+}
+
+function createHtmlList(collection) {
+  console.log('fired HTML creator');
+  console.log(collection);
+  const targetList = document.querySelector('.resto-list');
+  targetList.innerHTML = '';
+  collection.forEach((item) => {
+    const {name} = item;
+    const displayName = name.toLowerCase();
+    const injectThisItem = `<li>${displayName}</li>`;
+    targetList.innerHTML += injectThisItem;
+  });
 }
 async function mainEvent() { // the async keyword means we can make API requests
   console.log('script loaded');
   const form = document.querySelector('.main_form');
-  const submit = document.querySelector('button[type="submit"]');
+  const submit = document.querySelector('.submit_button');
   submit.style.display = 'none';
 
   console.log('form submission'); // this is substituting for a "breakpoint"
@@ -32,6 +45,7 @@ async function mainEvent() { // the async keyword means we can make API requests
       submitEvent.preventDefault();
       console.log('form submission');
       const restoArray = restoArrayMake(arrayFromJson.data);
+      createHtmlList(restoArray);
     });
   } // this is called "dot notation"
   // arrayFromJson.data - we're accessing a key called 'data' on the returned object
