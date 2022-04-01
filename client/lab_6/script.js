@@ -32,7 +32,6 @@ async function mainEvent() { // the async keyword means we can make API requests
   console.log('script loaded');
   const form = document.querySelector('.main_form');
   const submit = document.querySelector('.submit_button');
-  submit.style.display = 'none';
 
   console.log('form submission'); // this is substituting for a "breakpoint"
   const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'); // This accesses some data from our API
