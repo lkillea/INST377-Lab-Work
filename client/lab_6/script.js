@@ -6,7 +6,7 @@ function getRandomIntInclusive(min, max) {
 
 function restoArrayMake(dataArray) {
   console.log('fired dataHandler');
-  // console.table(dataArray); //
+  console.table(dataArray);
   const range = [...Array(15).keys()];
   const listItems = range.map((item, index) => {
     const restoNum = getRandomIntInclusive(0, dataArray.length - 1);
@@ -30,20 +30,20 @@ function createHtmlList(collection) {
 }
 async function mainEvent() { // the async keyword means we can make API requests
   console.log('script loaded');
-  const form = document.querySelector('.main_form');
+  const form = document.querySelector('.page_item');
   const submit = document.querySelector('.submit_button');
+  submit.style.display = 'none';
 
   console.log('form submission'); // this is substituting for a "breakpoint"
-  const results = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'); // This accesses some data from our API
+  const results = await fetch('/api/foodServicesPG'); // This accesses some data from our API
   const arrayFromJson = await results.json(); // This changes it into data we can use - an object
   console.log(arrayFromJson);
-
-  if (arrayFromJson.data.length > 0) {
+  if (arrayFromJson.length > 0) {
     submit.style.display = 'block';
     form.addEventListener('submit', async (submitEvent) => {
       submitEvent.preventDefault();
       console.log('form submission');
-      const restoArray = restoArrayMake(arrayFromJson.data);
+      const restoArray = restoArrayMake(arrayFromJson);
       createHtmlList(restoArray);
     });
   } // this is called "dot notation"
