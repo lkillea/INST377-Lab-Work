@@ -4,8 +4,8 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (newMax - newMin + 1) + newMin);
 }
 function restoArrayMake(dataArray) {
-  console.log('fired dataHandler');
-  console.table(dataArray);
+  // console.log('fired dataHandler');
+  // console.table(dataArray);
   const range = [...Array(15).keys()];
   const listItems = range.map((item, index) => {
     const restoNum = getRandomIntInclusive(0, dataArray.length - 1);
@@ -16,8 +16,8 @@ function restoArrayMake(dataArray) {
 }
 
 function createHtmlList(collection) {
-  console.log('fired HTML creator');
-  console.table(collection);
+  // console.log('fired HTML creator'); //
+  // console.table(collection); //
   const targetList = document.querySelector('.resto-list');
   targetList.innerHTML = '';
   collection.forEach((item) => {
@@ -31,17 +31,33 @@ async function mainEvent() { // the async keyword means we can make API requests
   console.log('script loaded');
   const form = document.querySelector('.page_item');
   const submit = document.querySelector('.submit_button');
+
+  const resto = document.querySelector('#resto_name');
+  const zipcode = document.querySelector('#zipcode');
   submit.style.display = 'none';
 
   console.log('form submission'); // this is substituting for a "breakpoint"
   const results = await fetch('/api/foodServicesPG'); // This accesses some data from our API
   const arrayFromJson = await results.json(); // This changes it into data we can use - an object
-  console.log(arrayFromJson);
+  // console.log(arrayFromJson); //
+
   if (arrayFromJson.length > 0) {
     submit.style.display = 'block';
+
+    let currentArray = [];
+    resto.addEventListener('input', async () => {
+      if (currentArray === undefined) { return; }
+      console.log(event.target.value);
+      const matchResto = currentArray.filter((item) => {
+        console.log(item);
+        console.log(item.name);
+        return item.name.includes(event.target.value);
+      });
+      console.log(matchResto);
+    });
     form.addEventListener('submit', async (submitEvent) => {
       submitEvent.preventDefault();
-      console.log('form submission');
+      // console.log('form submission'); //
       const restoArray = restoArrayMake(arrayFromJson);
       createHtmlList(restoArray);
     });
