@@ -46,19 +46,27 @@ async function mainEvent() { // the async keyword means we can make API requests
 
     let currentArray = [];
     resto.addEventListener('input', async () => {
-      if (currentArray === undefined) { return; }
       console.log(event.target.value);
-      const matchResto = currentArray.filter((item) => {
-        console.log(item);
-        console.log(item.name);
-        return item.name.includes(event.target.value);
+
+      if (currentArray.length < 1) {
+        return;
+      }
+
+      const selectResto = currentArray.filter((item) => {
+        const lowerName = item.name.toLowerCase();
+        const lowerValue = event.target.value.toLowerCase();
+        return lowerName.includes(lowerValue);
       });
-      console.log(matchResto);
+      // createHtmlList(selectResto);
+      console.log(selectResto);
+      createHtmlList(selectResto);
     });
+
     form.addEventListener('submit', async (submitEvent) => {
       submitEvent.preventDefault();
       // console.log('form submission'); //
-      const restoArray = restoArrayMake(arrayFromJson);
+      currentArray = restoArrayMake(arrayFromJson.data);
+      console.log(currentArray);
       createHtmlList(restoArray);
     });
   } // this is called "dot notation"
