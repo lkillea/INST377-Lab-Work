@@ -1,3 +1,81 @@
+function getRandomIntInclusive(min, max) {
+  const newMin = Math.ceil(min);
+  const newMax = Math.floor(max);
+  return Math.floor(Math.random() * (newMax - newMin + 1) + newMin);
+}
+
+function restoArrayMake(dataArray) {
+  // console.log('fired dataHandler');
+  // console.table(dataArray);
+  const range = [...Array(15).keys()];
+  const listItems = range.map((item, index) => {
+    const restoNum = getRandomIntInclusive(0, dataArray.length - 1);
+    return dataArray[restoNum];
+  });
+    // console.log(listItems);
+  return listItems;
+}
+
+function createHtmlList(collection) {
+  // console.log('fired HTML creator'); //
+  // console.table(collection); //
+  const targetList = document.querySelector('.resto-list');
+  targetList.innerHTML = '';
+  collection.forEach((item) => {
+    const {name} = item;
+    const displayName = name.toLowerCase();
+    const injectThisItem = `<li>${displayName}</li>`;
+    targetList.innerHTML += injectThisItem;
+  });
+}
+
+async function mainEvent() { // the async keyword means we can make API requests
+  console.log('script loaded');
+  const form = document.querySelector('.page_item');
+  const submit = document.querySelector('.submit_button');
+
+  const resto = document.querySelector('#resto_name');
+  const zipcode = document.querySelector('#zipcode');
+  submit.style.display = 'none';
+
+  console.log('form submission'); // this is substituting for a "breakpoint"
+  const results = await fetch('/api/foodServicesPG'); // This accesses some data from our API
+  const arrayFromJson = await results.json(); // This changes it into data we can use - an object
+  // console.log(arrayFromJson); //
+
+  if (arrayFromJson.length > 0) {
+    submit.style.display = 'block';
+
+    let currentArray = [];
+    resto.addEventListener('input', async () => {
+      console.log(event.target.value);
+
+      if (currentArray.length < 1) {
+        return;
+      }
+
+      const selectResto = currentArray.filter((item) => {
+        const lowerName = item.name.toLowerCase();
+        const lowerValue = event.target.value.toLowerCase();
+        return lowerName.includes(lowerValue);
+      });
+      // createHtmlList(selectResto);
+      console.log(selectResto);
+      createHtmlList(selectResto);
+    });
+
+    form.addEventListener('submit', async (submitEvent) => {
+      submitEvent.preventDefault();
+      // console.log('form submission'); //
+      currentArray = restoArrayMake(arrayFromJson.data);
+      console.log(currentArray);
+      createHtmlList(restoArray);
+    });
+  } // this is called "dot notation"
+  // arrayFromJson.data - we're accessing a key called 'data' on the returned object
+  // it contains all 1,000 records we need
+}
+
 const targetList = document.querySelector("tbody");
 const targetBox = document.querySelector(".tile");
 
@@ -47,7 +125,8 @@ async function populateRestaurants() {
 }
 /* eslint-disable max-len */
 function mapScript() {
-  const mymap = L.map("mapid").setView([38.988751, -76.94774], 14);
+  const LatLong = [38.7849, 76.8721];
+  const mymap = L.map(TargetId).setView(latLong, 13);
 
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
