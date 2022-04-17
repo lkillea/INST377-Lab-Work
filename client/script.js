@@ -4,19 +4,44 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (newMax - newMin + 1) + newMin);
 }
 
-function restoArrayMake(dataArray) {
+function dataHandler(restoArray) {
   // console.log('fired dataHandler');
   // console.table(dataArray);
-  const range = [...Array(15).keys()];
-  const listItems = range.map((item, index) => {
-    const restoNum = getRandomIntInclusive(0, dataArray.length - 1);
-    return dataArray[restoNum];
-  });
-    // console.log(listItems);
-  return listItems;
+  const range = [...Array(listSize).keys()];
+  const newList = range.map((item, index) => restoArray[index]);
+  return newList;
 }
 
-function createHtmlList(collection) {
+function createHtmlList(collection, entry, numba) {
+  const filterSearch = collection.filter((item) => {
+    currentname = item.name;
+    namefixed = currentname.toLowerCase();
+    currentinput = entry.toLowerCase();
+    return namefixed.includes(currentinput);
+  });
+
+  const filterZip = filterSearch.filter((item) => {
+    currentzip = numba;
+    restozip = item.zip;
+    return restozip.includes(currentzip);
+  });
+
+  let displaylength = Math.min(filterZip.length, 15);
+
+  const range2 = [...Array(displaylength).keys()];
+  const displayed = range2.map((item, index) => {
+    let restNumber = getRandomIntInclusive(0, (filterZip.length - 1));
+    let thisOne = filterZip.splice(restNum,1);
+    displaylength -=1;
+    return thisOne[0];
+  });
+
+
+
+
+
+
+
   // console.log('fired HTML creator'); //
   // console.table(collection); //
   const targetList = document.querySelector('.resto-list');
@@ -27,7 +52,7 @@ function createHtmlList(collection) {
     const injectThisItem = `<li>${displayName}</li>`;
     targetList.innerHTML += injectThisItem;
   });
-}
+
 
 async function mainEvent() { // the async keyword means we can make API requests
   console.log('script loaded');
