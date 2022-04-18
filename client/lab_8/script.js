@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars; */
 function getRandomIntInclusive(min, max) {
   const newMin = Math.ceil(min);
   const newMax = Math.floor(max);
@@ -26,12 +27,12 @@ function createHtmlList(collection, entry, numba) {
     return restozip.includes(currentzip);
   });
 
+  // eslint-disable-next-line no-unused-vars;
   let displaylength = Math.min(filterZip.length, 15);
-
   const range2 = [...Array(displaylength).keys()];
   const displayed = range2.map((item, index) => {
-    let restNumber = getRandomIntInclusive(0, (filterZip.length - 1));
-    let thisOne = filterZip.splice(restNum,1);
+    const restNum = getRandomIntInclusive(0, (filterZip.length - 1));
+    const thisOne = filterZip.splice(restNum, 1);
     displaylength -= 1;
     return thisOne[0];
   });
@@ -51,14 +52,14 @@ function createHtmlList(collection, entry, numba) {
 function initMap(targetId) {
   const baseCoords = [38.9, -76.8721];
   const map = L.map(targetId).setView(baseCoords, 10);
-  L.tileLayer(('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
-  }).addTo(map));
+  }).addTo(map);
   return map;
 }
 

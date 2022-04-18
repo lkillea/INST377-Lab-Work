@@ -66,6 +66,12 @@ body {
   margin-top: 10px;
 }
 
+.form_inputs label {
+  margin: 10 0 5 0;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
 .banner {
   background-color: rgb(255, 211, 65);
   padding: 10px;
@@ -116,4 +122,29 @@ h1 {
 
 .resto_list li {
   margin-top: 5px
+}
+
+.vegan {
+  padding: 10px;
+  margin: auto;
+  border: none;
+}
+
+.vegan label {
+  font-weight: normal;
+  font-size: 1em;
+}
+
+.vegan legend {
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.options {
+  float: left;
+}
+
+#zip {
+  margin-bottom: 10px;
 }

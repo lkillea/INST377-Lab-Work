@@ -4,17 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script> 
+    crossorigin=""></script>
     <link rel="stylesheet" href="./style.css">
-    <title></title>
   </head>
   <body>
     <div class='wrapper'>
@@ -30,6 +26,21 @@
               <input type="text" name="zip" id="zip"></input>
             </div>
             
+            <fieldset class="vegan">
+              <legend>Veggie or Vegan?</legend>
+              <label for="yes" class="radio_label">Yes</label>
+              <input id="yes"
+                  name="vegan"
+                  type="radio"
+                  value="yes">
+              <label for="no" class="radio_label">No</label>
+              <input id="no"
+                  name="vegan"
+                  type="radio"
+                  value="no"
+                  checked>
+          </fieldset>
+
             <button class="submit" type="submit">Search</button>
             
           </div>
