@@ -12,7 +12,7 @@ function dataHandler(restoArray) {
   const newList = range.map((item, index) => restoArray[index]);
   return newList;
 }
-
+//
 function createHtmlList(collection, entry, numba) {
   const filterSearch = collection.filter((item) => {
     currentname = item.name;
