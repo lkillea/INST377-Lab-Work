@@ -7,6 +7,7 @@ import path from 'path';
 import apiRoutes from './server/routes/apiRoutes.js';
 import AlbumsRoutes from './server/routes/AlbumsRoutes.js';
 import labRoutes from './server/labRoutes.js';
+import album from './models/album.js';
 
 dotenv.config();
 const __dirname = path.resolve();
