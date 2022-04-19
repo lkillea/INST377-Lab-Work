@@ -5,6 +5,7 @@ import connectReload from 'connect-livereload';
 import dotenv from 'dotenv';
 import path from 'path';
 import apiRoutes from './server/routes/apiRoutes.js';
+import AlbumsRoutes from './server/routes/AlbumsRoutes.js';
 import labRoutes from './server/labRoutes.js';
 
 dotenv.config();
