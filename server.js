@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import express from 'express';
-import album from './models/album.js';
-import apiRoutes from './routes/apiRoutes.js';
-import AlbumsRoutes from './routes/AlbumsRoutes.js';
+import apiRoutes from './server/routes/apiRoutes.js';
+
 
 const app = express();
 
@@ -14,7 +13,6 @@ app.use(express.json());
 
 app.use(express.static(staticFolder));
 //app.use('/api', apiRoutes);
-app.use('/api', AlbumsRoutes);
 
 async function bootServer() {
   try {
